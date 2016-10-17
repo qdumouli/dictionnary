@@ -1,32 +1,25 @@
 #! usr/bin/env python
-
+import sys
 import time
 from preProcesser import preProcessing
 from documents import getDocs
-from query import Query
+from query import makeQuery
 import processIndex
 
-def indexGeneration():
+def indexGeneration(memorysize):
 	print "Fetching the docs"
 	docs = getDocs()
 	print "Number of docs ", len(docs)
 
-	preProcessing(docs)
+	preProcessing(docs,memorysize)
 
 	# queryInput = Query(postingsList)
 	# while True:
 	# 	inputed = raw_input("Enter your search query: ")
 	# 	result = queryInput.makeQuery(inputed)
-
-
-def query():
-	queryInput = Query()
 	while True:
 		inputed = raw_input("Enter your search query: ")
-		queryInput.makeQuery(inputed)
-
-
+		makeQuery(inputed)
 
 if __name__ == "__main__":
-	indexGeneration()
-	query()
+	indexGeneration(int(sys.argv[1]))

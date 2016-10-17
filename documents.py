@@ -11,6 +11,8 @@ def getDocs():
 			for texts in soup.findAll('reuters'):
 				if texts.find('body'):
 					contentDict[int(texts.get('newid'))] = texts.find('body').text.lower()
+				if texts.find('text'):
+					contentDict[int(texts.get('newid'))] = texts.find('text').text.lower()
 	return contentDict
 
 	# contentDict = dict()
