@@ -1,6 +1,6 @@
 #! usr/bin/env python
 import sys
-import time
+# import time
 from preProcesser import preProcessing
 from documents import getDocs
 import query as q
@@ -26,3 +26,4 @@ def query():
 
 if __name__ == "__main__":
 	indexGeneration(int(sys.argv[1]))
+	query()

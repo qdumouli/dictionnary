@@ -1,4 +1,6 @@
 import glob
+import sys
+sys.path.append('beautifulsoup4-4.5.1')
 from bs4 import BeautifulSoup
 
 def getDocs():
@@ -16,11 +18,13 @@ def getDocs():
 				#if tag body found
 				if texts.find('body'):
 					#dictionary key is the id while whole body is the value
-					contentDict[int(texts.get('newid'))] = texts.find('body').text.lower()
+					contentDict[int(texts.get('newid'))] = texts.find('body').text
+					# contentDict[int(texts.get('newid'))] = texts.find('body').text.lower()
 				#if no body tag found but there is a text tag
 				if texts.find('text'):
 					#dictionary key is the id while whole text is the value
-					contentDict[int(texts.get('newid'))] = texts.find('text').text.lower()
+					contentDict[int(texts.get('newid'))] = texts.find('text').text
+					# contentDict[int(texts.get('newid'))] = texts.find('text').text.lower()
 	#gives back the dictionary
 	return contentDict
 	

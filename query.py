@@ -10,7 +10,7 @@ class Query():
 
 	def makeQuery(self,queryInput):
 		#make query lowercase
-		queryInput = queryInput.lower()
+		queryInput = queryInput
 
 		#split the query if there is a space => we will take this as an AND query
 		split = queryInput.split(" ")
@@ -24,6 +24,9 @@ class Query():
 			if queryTerm in self.retrieveIndex:
 				#add its postingsList to the array
 				postingsList.append(self.retrieveIndex[queryTerm])
+			#if not in the index then add an empty array for intersection
+			else:
+				postingsList.append([])
 
 		#if the postingsList array is not null
 		if postingsList:

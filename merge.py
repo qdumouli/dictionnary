@@ -1,7 +1,5 @@
-from collections import OrderedDict
 import json
 import glob
-import os
 
 def mergeBlocks():
 	#open output file
