@@ -1,30 +1,36 @@
-import processIndex
+import json
 
-def makeQuery(queryInput):
-	retrieveIndex = processIndex.readIndex()
-	queryInput = queryInput.lower()
-	queryTerms = queryInput
+class Query():
+	#class initializer
+	def __init__(self):
+		with open("./index/index.json", 'r') as index:
+			postingsList = json.load(index)
+		#initialize attribute retrieveIndex. Useful in main such that object is created and readIndex only called once. Index static so that's ok
+		self.retrieveIndex = postingsList
 
-	split = queryTerms.split(" ")
+	def makeQuery(self,queryInput):
+		#make query lowercase
+		queryInput = queryInput.lower()
 
+		#split the query if there is a space => we will take this as an AND query
+		split = queryInput.split(" ")
 
-	listOfPostingsList = []
+		#initialize postingsList array
+		postingsList = []
 
-	# if terms in self.retrieveIndex:
-	# 	listOfPostingsList.append(self.retrieveIndex[terms])
-	# print "Results: ", listOfPostingsList[0]
+		#for each term in the queried search
+		for queryTerm in split:
+			#if the term is in the index
+			if queryTerm in self.retrieveIndex:
+				#add its postingsList to the array
+				postingsList.append(self.retrieveIndex[queryTerm])
 
-	termCounter = 0
-	for queryTerm in split:
-		termCounter+=1
-		if queryTerm in retrieveIndex:
-			listOfPostingsList.append(retrieveIndex[queryTerm])
+		#if the postingsList array is not null
+		if postingsList:
+			#intersect the set of postingsList
+			results = list(set.intersection(*map(set, postingsList)))
+		#if not, no results
+		else:
+			results = []
 
-	if listOfPostingsList:
-		results = list(set.intersection(*map(set, listOfPostingsList)))
-	else:
-		print "Yo"
-		# results = [filter(lambda x: x in listOfPostingsList, sublist) for sublist in listOfPostingsList]
-
-	print "Number of terms", termCounter
-	print "Results: ", sorted(results)
+		print "Results: ", sorted(results)
