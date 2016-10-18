@@ -55,12 +55,9 @@ def preProcessing(documents,memorysize):
 			if term in postingsList:
 				#The term is already in the postings list => check if the key is already in the postings list
 				if key not in postingsList[str(term)]:
-					postingsCounter+=1
 					#if key is not in posting list, add it
 					postingsList[str(term)].append(key)
 			else:
-				postingsCounter+=1
-				termCounter+=1
 				#if term not in postings list, initiate an empty array of document ids
 				postingsList[str(term)] = [key]
 				

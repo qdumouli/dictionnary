@@ -1,7 +1,7 @@
 import glob
 import sys
-sys.path.append('beautifulsoup4-4.5.1')
 from bs4 import BeautifulSoup
+print sys.path
 
 def getDocs():
 
