@@ -3,6 +3,7 @@ import glob
 
 def mergeBlocks():
 	#open output file
+	print "In mergeBlocks"
 	with open('./index/index.json', 'a+') as theFile:
 		#initialize empty dict
 		dictionary = {}
